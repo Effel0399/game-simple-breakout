@@ -43,6 +43,16 @@
             ball.body.collideWorldBounds = true;
             ball.body.bounce.set(1); //set bounce speed multiplier
 
+            //disable ball collision with the bottom edge screen
+            game.physics.arcade.checkCollision.down = false;
+
+            //check if ball out of bounds
+            ball.checkWorldBounds = true;
+            ball.events.onOutOfBounds.add(() => {
+                alert("GAME OVER!");
+                location.reload();
+            }, this);
+
             paddle = game.add.sprite(
                 game.world.width * 0.5,
                 game.world.height - 5,
