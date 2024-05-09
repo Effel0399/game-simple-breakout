@@ -24,6 +24,9 @@
         let newBrick;
         let brickInfo;
 
+        let scoreText;
+        let score = 0;
+
         function preload() {
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.pageAlignHorizontally = true;
@@ -68,6 +71,12 @@
             paddle.body.immovable = true;
 
             initBricks();
+            
+            //scoring system
+            scoreText = game.add.text(5, 5, "POINTS: 0", {
+                font: "18px Arial",
+                fill: "#0095DD",
+            });
         }
         function update() {
             game.physics.arcade.collide(ball, paddle);
@@ -109,6 +118,8 @@
 
         function ballHitBrick(ball, brick) {
             brick.kill();
+            score += 10;
+            scoreText.setText('POINTS: ' + score);
         }
     </script>
 </body>
