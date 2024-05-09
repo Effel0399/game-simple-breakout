@@ -16,6 +16,7 @@
 <body>
     <script>
         const game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+        
         let ball;
         let paddle;
 
@@ -31,9 +32,14 @@
         function create() {
             game.physics.startSystem(Phaser.Physics.ARCADE);
             
-            ball = game.add.sprite(50, 50, "ball");
+            ball = game.add.sprite(
+                game.world.width * 0.5, 
+                game.world.height - 25, 
+                "ball",
+            );
+            ball.anchor.set(0.5);
             game.physics.enable(ball, Phaser.Physics.ARCADE);
-            ball.body.velocity.set(150,150);
+            ball.body.velocity.set(150,-150);
             ball.body.collideWorldBounds = true;
             ball.body.bounce.set(1); //set bounce speed multiplier
 
